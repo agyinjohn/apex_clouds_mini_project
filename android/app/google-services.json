@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "466308218787",
+    "project_id": "apexclouds-ed3df",
+    "storage_bucket": "apexclouds-ed3df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466308218787:android:8578a6360ec7d1d3e4e416",
+        "android_client_info": {
+          "package_name": "com.example.apex_clouds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466308218787-cao2m3r99j6cef564nk0e06emvsmv35e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtQuHknAZvcgd1bMgqn2LVX-eRhclZ5dA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466308218787-cao2m3r99j6cef564nk0e06emvsmv35e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
