@@ -51,11 +51,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         isLoading = false;
       });
-         
-      Fluttertoast.showToast(
+         if(res == 'Successful'){
+          Fluttertoast.showToast(
           msg: res, backgroundColor: Colors.grey, textColor: Colors.white);
           // ignore: use_build_context_synchronously
           Navigator.push(context, MaterialPageRoute(builder: (context)=> const LoginScreen()));
+         }else{
+          Fluttertoast.showToast(msg: 'Error could\'t sign up');
+         }
+      
     }catch(e){
        setState(() {
         isLoading = false;

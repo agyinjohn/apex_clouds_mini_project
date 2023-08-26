@@ -33,11 +33,11 @@ class Authentication {
       try {
         UserCredential credential = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
-
+     
         String photoUrl = await ImageStorage()
             .uploadeImageToStorage(file!, false, 'Profilepics');
-
-        model.User user = model.User(
+            if(credential.user != null){
+                        model.User user = model.User(
             bio: userbio,
             email: email,
             followers: [],
@@ -49,7 +49,10 @@ class Authentication {
         await _storage.collection('users').doc(credential.user!.uid).set(
               user.toJson(),
             );
-        result = 'Succesfull Sign up';
+           result = 'Successful';
+            }
+
+
       } catch (err) {
         result = err.toString();
         // ignore: avoid_print

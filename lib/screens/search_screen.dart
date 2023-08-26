@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 
 import '../utils/colors.dart';
+import '../utils/post_method.dart';
 import '../widgets/follow_button.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -149,7 +150,14 @@ class _SearchScreenState extends State<SearchScreen> {
                                     textColor: primaryColor,
                                     backgroundColor: mobileBacgroundColor,
                                     funtion: () async {
-                                      
+                                       await FireStoreMethods()
+                                              .followingUser(
+                                                  FirebaseAuth.instance
+                                                      .currentUser!.uid,
+                                                  snapshot.data!.docs[index]['uid']);
+                                          setState(() {
+                                            
+                                          });
                                     },
                                   ): FollowButton(
                                     widthI: 100,
@@ -158,7 +166,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                         textColor: primaryColor,
                                         backgroundColor: mobileBacgroundColor,
                                         funtion: () async {
-                                          
+                                           await FireStoreMethods()
+                                              .followingUser(
+                                                  FirebaseAuth.instance
+                                                      .currentUser!.uid,
+                                                      snapshot.data!.docs[index]['uid'],
+                                                  );
+                                                  setState(() {
+                                                    
+                                                  });
                                         },
                                       )
                               

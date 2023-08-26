@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 
 import 'package:intl/intl.dart';
@@ -117,11 +119,17 @@ class _PostCardState extends State<PostCard> {
             child: Stack(alignment: Alignment.center, children: [
               Container(   
                 margin: const EdgeInsets.all(1),
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.45,   //
+                
                 width: double.infinity,
-                child: Image.network(
-                  widget.snap['photoUrl'],
+                child: CachedNetworkImage(
                   fit: BoxFit.cover,
+                  imageUrl: widget.snap['photoUrl'],
+                  placeholder: (context, url) => const  SpinKitThreeBounce(
+                    size: 50.0,
+                    color: Colors.white,
+                  ),
+                  errorWidget: (context, url, error) => const SpinKitSpinningLines(color: Colors.white),
                 ),
               ),
               AnimatedOpacity(
