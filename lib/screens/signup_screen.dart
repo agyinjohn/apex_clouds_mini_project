@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../utils/colors.dart';
 import '../utils/pick_image_method.dart';
 import '../utils/sign_up_method.dart';
@@ -183,9 +184,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     color: blueColor,
                   ),
                   child: isLoading
-                      ? const CircularProgressIndicator(
-                          color: Colors.white,
-                        )
+                      ? const  SpinKitThreeBounce(
+                    size: 50.0,
+                    color: Colors.white,
+                  )
                       : const Text('Sign Up'),
                 ),
               ),

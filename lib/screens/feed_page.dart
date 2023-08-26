@@ -1,5 +1,7 @@
+import 'package:apex_clouds/utils/pick_image_method.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../utils/colors.dart';
 import '../widgets/post_card.dart';
@@ -26,9 +28,11 @@ class _FeedPageState extends State<FeedPage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showSnackBarAction(context, 'Not yet implemented');
+            },
             icon: const Icon(
-              Icons.messenger_outline,
+              Icons.notification_add,
               color: primaryColor,
             ),
           ),
@@ -39,11 +43,11 @@ class _FeedPageState extends State<FeedPage> {
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: SpinKitThreeBounce(color: Colors.white,size: 50,));
             }else if(snapshot.data!.docs.isEmpty){
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: SpinKitThreeBounce(color: Colors.white,size: 50,));
             }else if(snapshot.data == null){
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: SpinKitThreeBounce(color: Colors.white,size: 50,));
             }
             return ListView.builder(
                 itemCount: snapshot.data!.docs.length,

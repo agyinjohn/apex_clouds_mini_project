@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../models/user_model.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
@@ -72,7 +73,7 @@ class _MobileScreenState extends State<MobileScreen> {
     // final User? user = Provider.of<UserProvider>(context).getUser;
 
     return user == null
-        ? const Scaffold(body: Center(child: CircularProgressIndicator()))
+        ? const Scaffold(body: Center(child: SpinKitThreeBounce(color:  Colors.white,size: 50,)))
         : Scaffold(
             body: PageView(
                 onPageChanged: changePage,

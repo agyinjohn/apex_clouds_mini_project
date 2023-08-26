@@ -4,6 +4,7 @@ import 'package:apex_clouds/screens/login_screen.dart';
 import 'package:apex_clouds/widgets/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../utils/pick_image_method.dart';
 
@@ -78,7 +79,10 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                decoration: BoxDecoration(
                  color:Colors.blue,
                  borderRadius: BorderRadius.circular(2)),
-               child: isLoading?  const Center(child:  CircularProgressIndicator(color: Colors.white,)) : const Center(child: Text('Reset Password',style: TextStyle(color:  Colors.white, fontSize: 20, fontWeight: FontWeight.bold),) ) ,),
+               child: isLoading?  const Center(child: SpinKitThreeBounce(
+                    size: 50.0,
+                    color: Colors.white,
+                  )) : const Center(child: Text('Reset Password',style: TextStyle(color:  Colors.white, fontSize: 20, fontWeight: FontWeight.bold),) ) ,),
             ),
           ),)
        ],),

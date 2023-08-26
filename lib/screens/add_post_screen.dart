@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../models/user_model.dart';
@@ -16,7 +17,7 @@ class AddPostScreen extends StatefulWidget {
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
-  final TextEditingController _descriptioncontroller = TextEditingController();
+   TextEditingController _descriptioncontroller = TextEditingController();
   Uint8List? _file;
   bool isLoading = false;
   @override
@@ -97,6 +98,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   clealPost() {
     setState(() {
+      _descriptioncontroller.text  = '';
       _file = null;
     });
   }
@@ -232,55 +234,49 @@ class _AddPostScreenState extends State<AddPostScreen> {
               ],
             ),
             body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  isLoading
-                      ? const LinearProgressIndicator()
-                      : Container(
-                          padding: const EdgeInsets.only(top: 5, bottom: 10),
-                        ),
-                  const Divider(),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: [
-                  //     CircleAvatar(
-                  //       backgroundImage: NetworkImage(user!.photoUrl, scale: 2),
-                  //     ),
-                  //   ],
-                  // ),
-                   Container(
-                    width: size.width,
-                    height: size.height * 0.50,
-                     decoration: BoxDecoration(
-                       image: DecorationImage(
-                         image: MemoryImage(_file!),
-                         fit: BoxFit.fill,
-                         alignment: FractionalOffset.topCenter,
+              child: Stack(
+                children: [Column(
+                  children: [
+                     Container(
+                      width: size.width,
+                      height: size.height * 0.60,
+                       decoration: BoxDecoration(
+                         image: DecorationImage(
+                           image: MemoryImage(_file!),
+                           fit: BoxFit.fill,
+                           alignment: FractionalOffset.topCenter,
+                         ),
                        ),
                      ),
-                   ),
-                   SizedBox(height: size.height *  0.10,),
-                  TextField(
-                    
-                    controller: _descriptioncontroller,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      prefixIcon: Icon(Icons.emoji_emotions),
-                      focusedBorder: OutlineInputBorder(
-                        
-                        borderRadius: BorderRadius.all(Radius.circular(50))
+                     SizedBox(height: size.height *  0.10,),
+                    TextField(
+                      
+                      controller: _descriptioncontroller,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        prefixIcon: Icon(Icons.emoji_emotions),
+                        focusedBorder: OutlineInputBorder(
+                          
+                          borderRadius: BorderRadius.all(Radius.circular(50))
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(50))
+                        ),
+                        hintText: 'Write a caption......',
+                        border: InputBorder.none,
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50))
-                      ),
-                      hintText: 'Write a caption......',
-                      border: InputBorder.none,
+                      // minLines: 1,
+                      // maxLines: 8,
                     ),
-                    // minLines: 1,
-                    // maxLines: 8,
-                  ),
-                ],
+                  ],
+                ),
+            if(isLoading)
+                Container(
+                  width: size.width,
+                  height: size.height,
+                  color: Colors.black54,
+                  child: SpinKitThreeBounce(color: Colors.white,size: 50.0, ),)
+                ]
               ),
             ),
           );

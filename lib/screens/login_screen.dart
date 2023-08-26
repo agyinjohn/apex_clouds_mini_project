@@ -1,6 +1,7 @@
 import 'package:apex_clouds/screens/password_reset_screen.dart';
 import 'package:apex_clouds/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../responsive/responsive_layout_screen.dart';
 import '../utils/colors.dart';
 import '../utils/global_variables.dart';
@@ -125,9 +126,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: blueColor,
                   ),
                   child: isloading
-                      ? const CircularProgressIndicator(
-                          color: Colors.white,
-                        )
+                      ? const  SpinKitThreeBounce(
+                    size: 50.0,
+                    color: Colors.white,
+                  )
                       : const Text('Log In'),
                 ),
               ),

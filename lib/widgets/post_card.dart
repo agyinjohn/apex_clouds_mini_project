@@ -1,16 +1,18 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-
 import 'package:intl/intl.dart';
+
 import 'package:provider/provider.dart';
 
 import '../models/user_model.dart';
 import '../providers/user_provider.dart';
 import '../screens/comments_screen.dart';
 import '../utils/colors.dart';
+import '../utils/pick_image_method.dart';
 import '../utils/post_method.dart';
 import 'like_animation.dart';
 
@@ -86,6 +88,7 @@ class _PostCardState extends State<PostCard> {
                                               onTap: () {
                                                 FireStoreMethods().deletePost(
                                                     widget.snap['postId']);
+                                                    Navigator.pop(context);
                                               },
                                               child: Container(
                                                 padding:
@@ -190,14 +193,25 @@ class _PostCardState extends State<PostCard> {
                 width: 10,
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () async{
+                  // final url = Uri.parse(widget.snap['photoUrl']);
+                  // final response = await http.get(url);
+                  // final bytes = response.bodyBytes;
+                  // final temp = await getTemporaryDirectory();
+                  // final path = '${temp.path}/image.png';
+                  // File(path).writeAsBytesSync(bytes);
+                  // // ignore: deprecated_member_use
+                  // await Share.shareFiles([path],text: 'Shared from apex clouds');
+                },
                 icon: const Icon(Icons.send),
               ),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomRight,
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showSnackBarAction(context, 'This will save to your device');
+                    },
                     icon: const Icon(Icons.bookmark_border),
                   ),
                 ),

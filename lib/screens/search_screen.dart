@@ -60,7 +60,10 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               );
             }
-            return ListView.builder(itemBuilder: (context, index) {
+            return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+              
               var data =
                   snapshot.data!.docs[index].data() as Map<String, dynamic>;
               if (name.isEmpty) {
@@ -73,9 +76,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                     child: ListTile(
                       leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            (snapshot.data! as dynamic).docs[index]
-                                ['photoUrl']),
+                        backgroundImage: NetworkImage( data['photoUrl']),
                       ),
                       title: Text(
                         data['username'],
@@ -88,7 +89,9 @@ class _SearchScreenState extends State<SearchScreen> {
                               text: 'View profile',
                               textColor: primaryColor,
                               backgroundColor: mobileBacgroundColor,
-                              funtion: () async {},
+                              funtion: () async {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfileScreen(uid: FirebaseAuth.instance.currentUser!.uid),),);
+                              },
                             )
                           : snapshot.data!.docs[index]['followers'].contains(
                                   FirebaseAuth.instance.currentUser!.uid)
@@ -101,7 +104,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   funtion: () async {
                                     await FireStoreMethods().followingUser(
                                         FirebaseAuth.instance.currentUser!.uid,
-                                        snapshot.data!.docs[index]['uid']);
+                                        data['uid']);
                                     setState(() {});
                                   },
                                 )
@@ -114,14 +117,14 @@ class _SearchScreenState extends State<SearchScreen> {
                                   funtion: () async {
                                     await FireStoreMethods().followingUser(
                                       FirebaseAuth.instance.currentUser!.uid,
-                                      snapshot.data!.docs[index]['uid'],
+                                      data['uid'],
                                     );
                                     setState(() {});
                                   },
                                 ),
                     ));
               }
-              if (data['username']
+             else if (data['username']
                   .toString()
                   .toLowerCase()
                   .contains(name.toLowerCase())) {
@@ -174,15 +177,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             ),
                 );
               }
-              return Center(
-                child: Text(
-                  'No result found for "$name"',
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.normal),
-                ),
-              );
+              return Container();
             });
           },
         ));
